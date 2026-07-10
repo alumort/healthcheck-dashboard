@@ -1,0 +1,44 @@
+services:
+
+  db:
+
+    image: postgres:17
+
+    restart: always
+
+    environment:
+      POSTGRES_DB: healthcheck
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    ports:
+      - "5432:5432"
+
+  web:
+
+    build: .
+
+    command: python manage.py runserver 0.0.0.0:8000
+
+    volumes:
+      - ./config:/app/config
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      - db
+
+    environment:
+      DB_NAME: healthcheck
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+
+volumes:
+
+  postgres_data:
