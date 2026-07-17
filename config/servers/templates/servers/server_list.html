@@ -1,5 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Lista de servidores</h1>
+
+<h1>Servidores registrados</h1>
+
+<a href="{% url 'server_create' %}">
+    <button>Nuevo servidor</button>
+</a>
+
+<hr>
+
+{% if servidores %}
+
+    <ul>
+    {% for servidor in servidores %}
+        <li>
+            <strong>{{ servidor.nombre }}</strong><br>
+            {{ servidor.url }}<br>
+
+            <a href="{% url 'server_detail' servidor.pk %}">
+                Ver detalles
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+{% else %}
+
+<p>No hay servidores registrados.</p>
+
+{% endif %}
+
 {% endblock %}
