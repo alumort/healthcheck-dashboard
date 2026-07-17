@@ -2,8 +2,12 @@
 
 {% block content %}
 
-<h1>Servidores registrados</h1>
+<a href="{% url 'dashboard' %}">
+    <button>← Dashboard</button>
+</a>
 
+<h1>Servidores registrados</h1>
+<hr>
 <a href="{% url 'server_create' %}">
     <button>Nuevo servidor</button>
 </a>
