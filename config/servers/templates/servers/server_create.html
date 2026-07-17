@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="{% url 'server_list' %}">
+    <button>← Volver a la lista</button>
+</a>
+
 <h1>Crear servidor</h1>
+<hr>
 <form method="post">
 
     {% csrf_token %}

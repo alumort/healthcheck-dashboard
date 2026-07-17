@@ -33,6 +33,9 @@ class HealthCheck(models.Model):
         choices=Status.choices,
         default=Status.UNKNOWN,
     )
-
+    status_code = models.PositiveSmallIntegerField(
+    null=True,
+    blank=True,)
     response_time = models.PositiveIntegerField()
     checked_at = models.DateTimeField(auto_now_add=True)
+    

@@ -1,5 +1,82 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="{% url 'server_list' %}">
+    <button>← Volver a la lista</button>
+</a>
+
+
 <h1>Detalle del servidor</h1>
+<hr>
+
+<p><strong>Nombre:</strong> {{ server.nombre }}</p>
+
+<p><strong>URL:</strong> {{ server.url }}</p>
+
+<p><strong>Descripción:</strong> {{ server.descripcion }}</p>
+
+<p><strong>Activo:</strong>
+    {% if server.activo %}
+        Sí
+    {% else %}
+        No
+    {% endif %}
+</p>
+
+<p><strong>Creado:</strong> {{ server.created_at }}</p>
+
+<p><strong>Última actualización:</strong> {{ server.updated_at }}</p>
+<h2>Última verificación</h2>
+
+{% if last_check %}
+
+    <p>
+        <strong>Estado:</strong>
+
+        {% if last_check.status == "UP" %}
+            <span style="color: green;">🟢 UP</span>
+
+        {% elif last_check.status == "DOWN" %}
+            <span style="color: red;">🔴 DOWN</span>
+
+        {% elif last_check.status == "TIMEOUT" %}
+            <span style="color: orange;">🟡 TIMEOUT</span>
+
+        {% else %}
+            <span style="color: gray;">⚪ UNKNOWN</span>
+        {% endif %}
+    </p>
+
+    <p>
+        <strong>Tiempo de respuesta:</strong>
+        {{ last_check.response_time }} ms
+    </p>
+
+    {% if last_check.status_code %}
+        <p>
+            <strong>Código HTTP:</strong>
+            {{ last_check.status_code }}
+        </p>
+    {% endif %}
+
+    <p>
+        <strong>Fecha:</strong>
+        {{ last_check.checked_at }}
+    </p>
+
+{% else %}
+
+    <p>⚪ Este servidor todavía no fue monitoreado.</p>
+
+{% endif %}
+
+<hr>
+<a href="{% url 'server_check' server.pk %}">
+    Verificar ahora
+</a>
+
+<a href="{% url 'server_update' server.pk %}">Editar servidor</a>
+
+<a href="{% url 'server_delete' server.pk %}">Eliminar servidor</a>
+
 {% endblock %}
