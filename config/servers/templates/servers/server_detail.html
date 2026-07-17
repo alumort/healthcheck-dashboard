@@ -26,51 +26,7 @@
 <p><strong>Creado:</strong> {{ server.created_at }}</p>
 
 <p><strong>Última actualización:</strong> {{ server.updated_at }}</p>
-<h2>Última verificación</h2>
 
-{% if last_check %}
-
-    <p>
-        <strong>Estado:</strong>
-
-        {% if last_check.status == "UP" %}
-            <span style="color: green;">🟢 UP</span>
-
-        {% elif last_check.status == "DOWN" %}
-            <span style="color: red;">🔴 DOWN</span>
-
-        {% elif last_check.status == "TIMEOUT" %}
-            <span style="color: orange;">🟡 TIMEOUT</span>
-
-        {% else %}
-            <span style="color: gray;">⚪ UNKNOWN</span>
-        {% endif %}
-    </p>
-
-    <p>
-        <strong>Tiempo de respuesta:</strong>
-        {{ last_check.response_time }} ms
-    </p>
-
-    {% if last_check.status_code %}
-        <p>
-            <strong>Código HTTP:</strong>
-            {{ last_check.status_code }}
-        </p>
-    {% endif %}
-
-    <p>
-        <strong>Fecha:</strong>
-        {{ last_check.checked_at }}
-    </p>
-
-{% else %}
-
-    <p>⚪ Este servidor todavía no fue monitoreado.</p>
-
-{% endif %}
-
-<hr>
 <a href="{% url 'server_check' server.pk %}">
     Verificar ahora
 </a>
@@ -78,5 +34,124 @@
 <a href="{% url 'server_update' server.pk %}">Editar servidor</a>
 
 <a href="{% url 'server_delete' server.pk %}">Eliminar servidor</a>
+<hr>
+<h2>Última verificación</h2>
+
+{% if last_check %}
+
+<p>
+    <strong>Estado:</strong>
+
+    {% if last_check.status == "UP" %}
+        <span style="color:green;">🟢 UP</span>
+
+    {% elif last_check.status == "DOWN" %}
+        <span style="color:red;">🔴 DOWN</span>
+
+    {% elif last_check.status == "TIMEOUT" %}
+        <span style="color:orange;">🟡 TIMEOUT</span>
+
+    {% else %}
+        <span style="color:gray;">⚪ UNKNOWN</span>
+    {% endif %}
+</p>
+
+<p>
+    <strong>Tiempo de respuesta:</strong>
+    {{ last_check.response_time }} ms
+</p>
+
+{% if last_check.status_code %}
+<p>
+    <strong>Código HTTP:</strong>
+    {{ last_check.status_code }}
+</p>
+{% endif %}
+
+<p>
+    <strong>Fecha:</strong>
+    {{ last_check.checked_at|date:"d/m/Y H:i:s" }}
+</p>
+
+{% else %}
+
+<p>⚪ Este servidor todavía no fue monitoreado.</p>
+
+{% endif %}
+
+<hr>
+
+<h2>Historial de verificaciones</h2>
+
+{% if checks %}
+
+<table border="1" cellpadding="10" cellspacing="0">
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Estado</th>
+            <th>HTTP</th>
+            <th>Tiempo</th>
+            <th>Fecha y hora</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for check in checks %}
+
+        <tr>
+
+            <td align="center">
+                {{ forloop.counter }}
+            </td>
+
+            <td align="center">
+                {% if check.status == "UP" %}
+                    🟢 <strong>UP</strong>
+
+                {% elif check.status == "DOWN" %}
+                    🔴 <strong>DOWN</strong>
+
+                {% elif check.status == "TIMEOUT" %}
+                    🟡 <strong>TIMEOUT</strong>
+
+                {% else %}
+                    ⚪ <strong>UNKNOWN</strong>
+                {% endif %}
+            </td>
+
+            <td align="center">
+                {{ check.status_code|default:"-" }}
+            </td>
+
+            <td align="center">
+                {{ check.response_time }} ms
+            </td>
+
+            <td>
+                {{ check.checked_at|date:"d/m/Y H:i:s" }}
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+<p>
+    <small>
+        Mostrando {{ checks|length }} verificación{{ checks|length|pluralize:"es" }}.
+    </small>
+</p>
+
+{% else %}
+
+<p>⚪ No hay verificaciones registradas.</p>
+
+{% endif %}
 
 {% endblock %}

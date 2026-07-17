@@ -26,7 +26,7 @@ def server_create(request):
 
         if form.is_valid():
             form.save()
-            return redirect("dashboard")
+            return redirect("server_list")
 
     else:
         form = ServerForm()
@@ -42,15 +42,21 @@ def server_create(request):
 
 def server_detail(request, pk):
     server= get_object_or_404(Server, pk=pk)
-    last_check = server.health_checks.order_by("-checked_at").first()
 
-    return render(request,
-    "servers/server_detail.html",
+    checks = server.health_checks.order_by("-checked_at")[:10]
+
+    last_check = checks.first()
+
+    return render(
+        request,
+        "servers/server_detail.html",
         {
             "server": server,
             "last_check": last_check,
+            "checks": checks,
         },
     )
+
 
 def server_update(request, pk):
     server = get_object_or_404(Server, pk=pk)
