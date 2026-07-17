@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Crear servidor</h1>
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form }}
+
+    <button type="submit">
+        Guardar servidor
+    </button>
+
+</form>
+{% endblock %}

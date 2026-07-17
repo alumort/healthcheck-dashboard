@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>HealthCheck Dashboard</h1>
+
+<p>Bienvenido al panel de monitoreo.</p>
+
+<a href="{% url 'server_list' %}">
+    <button>Ver servidores</button>
+</a>
+
+<a href="{% url 'server_create' %}">
+    <button>Añadir servidor</button>
+</a>
+
+{% endblock %}
