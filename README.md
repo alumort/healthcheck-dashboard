@@ -14,10 +14,10 @@ El sistema realiza verificaciones para conocer si un servidor se encuentra dispo
 
 ## Funcionalidades (en desarrollo)
 
-- [ ] Registro de servidores y sitios web.
-- [ ] Verificación del estado (UP/DOWN).
-- [ ] Medición del tiempo de respuesta.
-- [ ] Historial de verificaciones.
+- [X] Registro de servidores y sitios web.
+- [X] Verificación del estado (UP/DOWN).
+- [X] Medición del tiempo de respuesta.
+- [X] Historial de verificaciones.
 - [ ] Dashboard con estadísticas.
 - [ ] Alertas por correo electrónico.
 - [ ] Alertas por Telegram.
