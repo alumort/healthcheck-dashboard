@@ -1,19 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{% url 'server_list' %}">
-    <button>← Volver a la lista</button>
+<a href="{% url 'server_list' %}" class="btn btn-secondary">
+    Volver a la lista
 </a>
 
+<div class="card">
 
-<h1>Detalle del servidor</h1>
-<hr>
+    <div class="card-header">
+        Información del servidor
+    </div>
 
-<p><strong>Nombre:</strong> {{ server.nombre }}</p>
+    <div class="card-body">
 
-<p><strong>URL:</strong> {{ server.url }}</p>
+        <p><strong>Nombre:</strong> {{ server.nombre }}</p>
 
-<p><strong>Descripción:</strong> {{ server.descripcion }}</p>
+        <p><strong>URL:</strong> {{ server.url }}</p>
+
+        <p><strong>Descripción:</strong> {{ server.descripcion }}</p>
+
+    </div>
+
+</div>
 
 <p><strong>Activo:</strong>
     {% if server.activo %}
@@ -33,7 +41,7 @@
 
 <a href="{% url 'server_update' server.pk %}">Editar servidor</a>
 
-<a href="{% url 'server_delete' server.pk %}">Eliminar servidor</a>
+<a href="{% url 'server_delete' server.pk %}" class="btn btn-danger">Eliminar servidor</a>
 <hr>
 <h2>Última verificación</h2>
 
@@ -43,16 +51,22 @@
     <strong>Estado:</strong>
 
     {% if last_check.status == "UP" %}
-        <span style="color:green;">🟢 UP</span>
+       <span class="badge bg-success">
+    UP
+</span>
 
     {% elif last_check.status == "DOWN" %}
-        <span style="color:red;">🔴 DOWN</span>
+        <span class="badge bg-danger">
+    DOWN
+</span>
 
     {% elif last_check.status == "TIMEOUT" %}
-        <span style="color:orange;">🟡 TIMEOUT</span>
+ <span class="badge bg-warning text-dark">
+    TIMEOUT
+</span>
 
     {% else %}
-        <span style="color:gray;">⚪ UNKNOWN</span>
+        <span class="badge bg-warning text-dark">⚪ UNKNOWN</span>
     {% endif %}
 </p>
 
@@ -85,7 +99,7 @@
 
 {% if checks %}
 
-<table border="1" cellpadding="10" cellspacing="0">
+<table class="table table-striped table-hover">
 
     <thead>
         <tr>
