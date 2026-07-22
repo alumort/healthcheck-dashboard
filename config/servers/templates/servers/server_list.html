@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<a href="{% url 'dashboard' %}">
-    <button>← Dashboard</button>
+<a href="{% url 'dashboard' %}" class="btn btn-secondary">
+    Volver al Dashboard
 </a>
 
 <h1>Servidores registrados</h1>
 <hr>
-<a href="{% url 'server_create' %}">
-    <button>Nuevo servidor</button>
+<a href="{% url 'server_create' %}" class="btn btn-primary">
+    Nuevo servidor
 </a>
 
 <hr>
@@ -22,7 +22,7 @@
             <strong>{{ servidor.nombre }}</strong><br>
             {{ servidor.url }}<br>
 
-            <a href="{% url 'server_detail' servidor.pk %}">
+            <a href="{% url 'server_detail' servidor.pk %}" class="btn btn-secondary">
                 Ver detalles
             </a>
         </li>
