@@ -2,16 +2,67 @@
 
 {% block content %}
 
-<h1>HealthCheck Dashboard</h1>
+<div class="text-center mb-5">
 
-<p>Bienvenido al panel de monitoreo.</p>
+    <h1 class="display-4">🖥️ HealthCheck Dashboard</h1>
 
-<a href="{% url 'server_list' %}" class="btn btn-secondary">
-Ver servidores
-</a>
+    <p class="lead">
+        Bienvenido al panel de monitoreo de servidores.
+    </p>
 
-<a href="{% url 'server_create' %}" class="btn btn-secondary">
-Añadir servidor
-</a>
+</div>
 
+<div class="row">
+
+    <div class="col-md-6 mb-3">
+
+        <div class="card shadow">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    📋 Servidores
+                </h5>
+
+                <p class="card-text">
+                    Ver todos los servidores registrados y su estado.
+                </p>
+
+                <a href="{% url 'server_list' %}"
+                   class="btn btn-primary">
+                    Ver servidores
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6 mb-3">
+
+        <div class="card shadow">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    ➕ Nuevo servidor
+                </h5>
+
+                <p class="card-text">
+                    Registrar un nuevo servidor para monitorear.
+                </p>
+
+                <a href="{% url 'server_create' %}"
+                   class="btn btn-success">
+                    Añadir servidor
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 {% endblock %}
