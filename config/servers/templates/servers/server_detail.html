@@ -35,11 +35,11 @@
 
 <p><strong>Última actualización:</strong> {{ server.updated_at }}</p>
 
-<a href="{% url 'server_check' server.pk %}">
+<a href="{% url 'server_check' server.pk %}" class="btn btn-secondary">
     Verificar ahora
 </a>
 
-<a href="{% url 'server_update' server.pk %}">Editar servidor</a>
+<a href="{% url 'server_update' server.pk %}" class="btn btn-secondary">Editar servidor</a>
 
 <a href="{% url 'server_delete' server.pk %}" class="btn btn-danger">Eliminar servidor</a>
 <hr>
