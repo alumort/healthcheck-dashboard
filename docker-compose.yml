@@ -21,10 +21,10 @@ services:
 
     build: .
 
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000 --noreload
 
-    volumes:
-      - ./config:/app/config
+   # volumes:
+   #   - .:/app
 
     ports:
       - "8000:8000"
@@ -48,6 +48,18 @@ services:
     working_dir: /app/config
     env_file:
       - .env
+
+  celery-beat:
+    build: .
+    command: celery -A config beat -l info
+    working_dir: /app/config
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+    - redis
+    - db
 
     environment:
       DB_NAME: healthcheck

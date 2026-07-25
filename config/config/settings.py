@@ -1,5 +1,13 @@
 import environ
 from pathlib import Path
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    "check-all-servers": {
+        "task": "servers.tasks.check_all_servers",
+        "schedule": 300.0,  
+    },
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
