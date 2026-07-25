@@ -31,9 +31,9 @@ The monitoring system runs asynchronously using Celery workers and scheduled tas
 - Fully Dockerized environment
 ## Screenshots
 
-### Dashboard
+### Registered servers
 
-![Dashboard](docs/images/dashboard.png)
+![Registered servers](docs/images/dashboard.png)
 
 ### Server Details
 
