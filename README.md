@@ -32,7 +32,9 @@ The monitoring system runs asynchronously using Celery workers and scheduled tas
 ## Screenshots
 
 
+### Dashboard
 
+![Dashboard](docs/images/dashboard.png)
 
 ### Registered servers
 
