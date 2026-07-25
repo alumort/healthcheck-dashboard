@@ -1,28 +1,127 @@
 # HealthCheck Dashboard
 
-HealthCheck Dashboard es una aplicación desarrollada con Django que permite monitorear el estado de servidores y sitios web. 
-El sistema realiza verificaciones para conocer si un servidor se encuentra disponible (UP) o no (DOWN), registra el tiempo de respuesta y almacena un historial de las verificaciones realizadas.
+HealthCheck Dashboard is a Django-based monitoring system for HTTP services.
 
-## Tecnologías Utilizadas
+The application allows users to register servers, automatically check their availability, measure response times and store monitoring history.
 
-- Python
+The monitoring system runs asynchronously using Celery workers and scheduled tasks with Celery Beat.
+
+## Tech Stack
+
+- Python 3.12
 - Django
 - PostgreSQL
-- Docker & Docker Compose
-- Requests
-- Bootstrap (próximamente)
+- Celery
+- Celery Beat
+- Redis
+- Docker
+- Bootstrap 5
 
-## Funcionalidades (en desarrollo)
+## Features
 
-- [X] Registro de servidores y sitios web.
-- [X] Verificación del estado (UP/DOWN).
-- [X] Medición del tiempo de respuesta.
-- [X] Historial de verificaciones.
-- [ ] Dashboard con estadísticas.
-- [ ] Alertas por correo electrónico.
-- [ ] Alertas por Telegram.
-- [ ] Tareas periódicas con Celery.
+- Server management (Create, Read, Update, Delete)
+- HTTP availability monitoring
+- Response time measurement
+- Status tracking (UP, DOWN, TIMEOUT)
+- Health check history
+- Background task execution with Celery
+- Periodic monitoring with Celery Beat
+- PostgreSQL persistence
+- Fully Dockerized environment
 
-## Estado del proyecto
+## Architecture
 
-En desarrollo: el propósito de este proyecto es que sea una práctica para aprender Django, Docker y PostgreSQL siguiendo una arquitectura backend profesional.
+                +----------------+
+                |     Browser    |
+                +-------+--------+
+                        |
+                        v
+                 Django Web App
+                        |
+            +-----------+-----------+
+            |                       |
+            v                       v
+      PostgreSQL                Redis
+            ^                       ^
+            |                       |
+        HealthChecks         Celery Worker
+                                   ^
+                                   |
+                             Celery Beat
+
+
+## Project Structure
+healthcheck/
+│
+├── config/
+│ ├── settings.py
+│ ├── celery.py
+│ └── urls.py
+│
+├── servers/
+│ ├── models.py
+│ ├── views.py
+│ ├── tasks.py
+│ ├── services.py
+│ └── templates/
+│
+├── docker-compose.yml
+├── Dockerfile
+├── requirements.txt
+└── manage.py
+
+
+## Running the project
+
+### Clone repository
+
+bash
+git clone <repository-url>
+cd healthcheck
+docker compose build
+docker compose up
+
+The application will be available at: 
+http://localhost:8000
+
+### Environment
+The application uses environment variables for database configuration.
+
+POSTGRES_DB=healthcheck
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+
+### Database migrations
+
+Run migrations inside the container:
+docker compose exec web python manage.py migrate
+
+Create a superuser:
+docker compose exec web python manage.py createsuperuser
+
+## What I learned
+During this project I learned how to:
+
+During this project I learned how to:
+
+- Build a Django application from scratch
+- Design Django models and relationships
+- Work with PostgreSQL databases
+- Containerize applications using Docker
+- Implement asynchronous processing with Celery
+- Schedule background jobs with Celery Beat
+- Use Redis as a message broker
+- Organize a Django project with reusable applications
+- Separate business logic into services
+
+
+## Future Improvements
+Possible improvements:
+
+Add monitoring graphs with historical data
+Add authentication and user roles
+Add API endpoints using Django REST Framework
+Add notifications when a service goes down
+Add unit and integration tests
