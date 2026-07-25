@@ -27,8 +27,21 @@ The monitoring system runs asynchronously using Celery workers and scheduled tas
 - Background task execution with Celery
 - Periodic monitoring with Celery Beat
 - PostgreSQL persistence
+- 
 - Fully Dockerized environment
+## Screenshots
 
+### Dashboard
+
+![Dashboard](docs/images/dashboard.png)
+
+### Server Details
+
+![Server Details](docs/images/server-detail.png)
+
+### New Server
+
+![New Server](docs/images/new-server.png)
 ## Architecture
 
                 +----------------+
