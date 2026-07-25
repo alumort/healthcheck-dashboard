@@ -1,12 +1,56 @@
-HealthCheck Dashboard: el objetivo de esta app es monitorear servidores HTTP
+# Architecture
 
-Pantallas: 
-Dashboard, Lista de servidores, Crear servidor, Editar servidor, Eliminar servidor, Detalle del servidor
+## Components
 
-Navegacion:
+- Django
+- PostgreSQL
+- Redis
+- Celery Worker
+- Celery Beat
 
-Dashboard -> Lista -> Detalle -> Historial
+## Request Flow
 
-Modelos:
+User
+↓
 
-Server - id, nombre, url, descripcion, activo, created_at, updated_at
+Django View
+↓
+
+Model
+
+↓
+
+PostgreSQL
+
+Health Check Flow
+
+Celery Beat
+
+↓
+
+Celery Worker
+
+↓
+
+HTTP Request
+
+↓
+
+Save HealthCheck
+
+↓
+
+Dashboard
+
+Folder Structure
+
+config/
+    config/
+    servers/
+    templates/
+
+docs/
+
+Dockerfile
+
+docker-compose.yml

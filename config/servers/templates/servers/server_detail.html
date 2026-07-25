@@ -4,7 +4,9 @@
 <a href="{% url 'server_list' %}" class="btn btn-secondary">
     Volver a la lista
 </a>
-
+<a href="{% url 'dashboard' %}" class="btn btn-secondary">
+  Volver al Dashboard
+</a>
 <div class="card">
 
     <div class="card-header">
@@ -52,7 +54,7 @@
 
     {% if last_check.status == "UP" %}
        <span class="badge bg-success">
-    UP
+   UP 
 </span>
 
     {% elif last_check.status == "DOWN" %}
@@ -66,7 +68,7 @@
 </span>
 
     {% else %}
-        <span class="badge bg-warning text-dark">⚪ UNKNOWN</span>
+        <span class="badge bg-warning text-dark"></i> UNKNOWN</span>
     {% endif %}
 </p>
 
@@ -89,7 +91,7 @@
 
 {% else %}
 
-<p>⚪ Este servidor todavía no fue monitoreado.</p>
+<p></i> Este servidor todavía no fue monitoreado.</p>
 
 {% endif %}
 
@@ -123,16 +125,16 @@
 
             <td align="center">
                 {% if check.status == "UP" %}
-                    🟢 <strong>UP</strong>
+                        <span class="badge bg-success"><strong>UP</strong></span> 
 
                 {% elif check.status == "DOWN" %}
-                    🔴 <strong>DOWN</strong>
+                <span class="badge bg-danger"><strong>DOWN</strong></span>  
 
                 {% elif check.status == "TIMEOUT" %}
-                    🟡 <strong>TIMEOUT</strong>
+                 <span class="badge bg-warning text-dark"><strong>TIMEOUT</strong></span>   
 
                 {% else %}
-                    ⚪ <strong>UNKNOWN</strong>
+                    <span class="badge bg-warning text-dark"> <strong>UNKNOWN</strong></span>
                 {% endif %}
             </td>
 
@@ -158,13 +160,13 @@
 
 <p>
     <small>
-        Mostrando {{ checks|length }} verificación{{ checks|length|pluralize:"es" }}.
+        Mostrando {{ checks|length }} última{{ checks|length|pluralize:"es" }} verificacion{{ checks|length|pluralize:"es" }}.
     </small>
 </p>
 
 {% else %}
 
-<p>⚪ No hay verificaciones registradas.</p>
+<p>No hay verificaciones registradas.</p>
 
 {% endif %}
 
