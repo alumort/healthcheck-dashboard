@@ -3,3 +3,5 @@ psycopg[binary]
 django-environ
 gunicorn
 requests
+celery
+redis

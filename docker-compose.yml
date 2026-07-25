@@ -32,6 +32,23 @@ services:
     depends_on:
       - db
 
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  
+  celery:
+    build: .
+    command: celery -A config worker -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    working_dir: /app/config
+    env_file:
+      - .env
+
     environment:
       DB_NAME: healthcheck
       DB_USER: postgres
