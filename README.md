@@ -93,7 +93,7 @@ healthcheck/
 ### Clone repository
 
 bash
-git clone [<repository-url>](https://github.com/alumort/healthcheck-dashboard)
+git clone https://github.com/alumort/healthcheck-dashboard
 cd healthcheck
 docker compose build
 docker compose up
