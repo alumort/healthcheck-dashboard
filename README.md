@@ -27,7 +27,6 @@ The monitoring system runs asynchronously using Celery workers and scheduled tas
 - Background task execution with Celery
 - Periodic monitoring with Celery Beat
 - PostgreSQL persistence
-- 
 - Fully Dockerized environment
 ## Screenshots
 
@@ -94,7 +93,7 @@ healthcheck/
 ### Clone repository
 
 bash
-git clone <repository-url>
+git clone [<repository-url>](https://github.com/alumort/healthcheck-dashboard)
 cd healthcheck
 docker compose build
 docker compose up
